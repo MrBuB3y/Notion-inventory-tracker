@@ -30,11 +30,7 @@ streamlit run app.py
 
 ## 5. Validate
 
-```bash
-pytest
-```
-
-If the dashboard cannot load, verify that the token is current, the database IDs are correct, and both databases have been explicitly shared with the integration.
+Confirm the dashboard loads all 11 headline metrics plus the Sales Data Used for Profit and Inventory Overview tables. If it cannot load, verify that the token is current, the database IDs are correct, and both databases have been explicitly shared with the integration.
 
 ## Security
 
