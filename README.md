@@ -17,21 +17,15 @@ A portfolio-ready inventory and sales analytics system for a multi-platform resa
 flowchart LR
     A[Notion Inventory] --> C[Python data layer]
     B[Notion Sales] --> C
-    C --> D[Metric calculations]
-    D --> E[Streamlit dashboard]
+    C --> D[Data cleaning and relation merge]
+    D --> E[Metrics and Streamlit dashboard]
 ```
 
 ## Repository structure
 
 ```text
 notion-inventory-tracker/
-├── app.py                  # Streamlit dashboard
-├── src/
-│   ├── config.py           # Environment configuration
-│   ├── metrics.py          # Business metric calculations
-│   └── notion_client.py    # Notion API data access
-├── tests/
-│   └── test_metrics.py
+├── app.py                  # Complete dashboard and Notion integration
 ├── docs/
 │   ├── architecture.md
 │   ├── database-schema.md
@@ -54,7 +48,7 @@ The dashboard reports:
 - cost of sold inventory;
 - potential, expected, and minimum profit still available in stock.
 
-Financial metrics use `cost price × quantity sold`, ensuring partially sold multi-quantity products are handled correctly.
+Financial metrics use `cost price × quantity sold` for supplier cost. Each Sales row's `Sold Price` is treated as the total revenue for that sales line, matching the live Notion workflow.
 
 ## Quick start
 
@@ -75,13 +69,9 @@ The system uses two related Notion databases:
 
 See [docs/database-schema.md](docs/database-schema.md) for the complete property reference.
 
-## Tests
+## Implementation highlights
 
-Run:
-
-```bash
-pytest
-```
+The complete `app.py` includes paginated Notion API queries, extraction for titles, text, numbers, selects, dates, formulas, relations and rollups, defensive numeric/date cleaning, relation-based merging, refresh controls, metric cards and detailed sales and inventory tables.
 
 ## Future development
 
